@@ -18,7 +18,6 @@ public class SimpleFPSController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
     }
-
     void Update()
     {
         // --- MOUSE LOOK ---
