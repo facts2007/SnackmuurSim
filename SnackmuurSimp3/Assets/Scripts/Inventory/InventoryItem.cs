@@ -5,14 +5,22 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDragHandler
 {
+    [HideInInspector] public Item item;
+
     [Header("UI")]
-    //public Image Image;
+    public RawImage Image;
     [HideInInspector] public Transform parentAfterDrag;
 
-    //drag en drop
+    public void InitialiseItem(Item newItem)
+    {
+        item = newItem;
+        Image.texture = newItem.image;
+        GetComponentInChildren<TextMeshProUGUI>().text = newItem.Name;
+    }
 
+    //drag en drop
     public void OnBeginDrag(PointerEventData eventData) {
-       // Image.raycastTarget = false;
+        Image.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
     }
@@ -22,7 +30,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler,IDragHandler, IEnd
     }
 
     public void OnEndDrag(PointerEventData eventData) { 
-       // Image.raycastTarget=true;
+        Image.raycastTarget=true;
         transform.SetParent(parentAfterDrag);
     }
 }

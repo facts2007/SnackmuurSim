@@ -8,7 +8,11 @@ public class UIToggle : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            uiPanel.SetActive(!uiPanel.activeSelf);
+            bool isOpen = !uiPanel.activeSelf;
+            uiPanel.SetActive(isOpen);
+
+            Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = isOpen;
         }
     }
 }
