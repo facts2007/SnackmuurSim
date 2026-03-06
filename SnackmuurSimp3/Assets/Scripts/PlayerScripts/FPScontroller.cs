@@ -4,6 +4,7 @@ using UnityEngine;
 public class SimpleFPSController : MonoBehaviour
 {
     public GameObject inventoryPanel; // drag the same UI Panel here
+    public GameObject ShopPanel;
 
     public Transform cam;
     public float speed = 5f;
@@ -25,7 +26,7 @@ public class SimpleFPSController : MonoBehaviour
     {
         // Stop all input when inventory is open
         if (inventoryPanel != null && inventoryPanel.activeSelf) return;
-
+        if (ShopPanel != null && ShopPanel.activeSelf) return;
         // --- MOUSE LOOK ---
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

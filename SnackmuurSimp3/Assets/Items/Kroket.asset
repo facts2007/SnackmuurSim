@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Item
   Name: Kroket
   tile: {fileID: 0}
-  image: {fileID: 2800000, guid: 8b84263cd1fc3aa449583efba094fc20, type: 3}
+  image: {fileID: 2800000, guid: ff6671af07a7fd849a33c958fb535ab9, type: 3}
   Cost: 2.5
   stackable: 1
