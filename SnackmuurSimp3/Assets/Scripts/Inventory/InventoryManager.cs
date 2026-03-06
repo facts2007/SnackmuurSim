@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         changeSelectedSlot(0);
-        print("Selected Slot: " + selectedSlot);
+        LoadInventory();
     }
 
     private void Update()
@@ -73,5 +73,45 @@ public class InventoryManager : MonoBehaviour
             return item;
         }
         return null;
+    }
+
+    public void SaveInventory()
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            InventoryItem itemInSlot = inventorySlots[i].GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                print("Saving item: " + itemInSlot.item.Name + " in slot " + i);
+                PlayerPrefs.SetString("Slot" + i, itemInSlot.item.Name);
+            }
+            else
+            {
+                print("Saving empty slot: " + i);   
+                PlayerPrefs.SetString("Slot" + i, "");
+            }
+        }
+        PlayerPrefs.Save();
+    }
+
+    public void LoadInventory()
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            string itemName = PlayerPrefs.GetString("Slot" + i, "");
+            if (itemName != "")
+            {
+                Item item = Resources.Load<Item>(itemName);
+                if (item != null)
+                {
+                    SpawnNewItem(item, inventorySlots[i]);
+                }
+            }
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveInventory(); // save when game closes
     }
 }

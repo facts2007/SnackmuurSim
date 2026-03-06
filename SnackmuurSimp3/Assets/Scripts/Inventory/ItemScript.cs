@@ -9,5 +9,5 @@ public class Item : ScriptableObject
     public TileBase tile;
     public Texture2D image;
     public float Cost;
-    public bool stackable = true;
+    public bool stackable = false;
 }
