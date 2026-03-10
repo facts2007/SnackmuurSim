@@ -12,7 +12,7 @@ public class GarbageCan : MonoBehaviour
             Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (hit.collider.gameObject == gameObject) // only runs if THIS object is clicked
+                if (hit.collider.gameObject == gameObject)
                 {
                     Item selectedItem = inventoryManager.GetSelectedItem(false);
                     if (selectedItem != null)
