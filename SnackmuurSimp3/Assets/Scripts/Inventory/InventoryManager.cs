@@ -6,6 +6,7 @@ public class InventoryManager : MonoBehaviour
 {
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
+    public MoneyManager moneyManager;
 
     int selectedSlot = -1;
     private void Start()
@@ -39,15 +40,20 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(Item item)
     {
-        for (int i = 0; i < inventorySlots.Length; i++)
+        bool success = moneyManager.RemoveMoney(item.Cost);
+        if (success)
         {
-            InventorySlot slot = inventorySlots[i];
-            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-            
-            if (itemInSlot == null )
+            for (int i = 0; i < inventorySlots.Length; i++)
             {
-                SpawnNewItem(item, slot);
-                return;
+
+                InventorySlot slot = inventorySlots[i];
+                InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+                if (itemInSlot == null)
+                {
+                    SpawnNewItem(item, slot);
+                    return;
+                }
             }
         }
     }  
@@ -104,6 +110,7 @@ public class InventoryManager : MonoBehaviour
                 Item item = Resources.Load<Item>(itemName);
                 if (item != null)
                 {
+                    print("Loading item: " + item.Name + " in slot " + i);
                     SpawnNewItem(item, inventorySlots[i]);
                 }
             }
