@@ -88,12 +88,12 @@ public class InventoryManager : MonoBehaviour
             InventoryItem itemInSlot = inventorySlots[i].GetComponentInChildren<InventoryItem>();
             if (itemInSlot != null)
             {
-                print("Saving item: " + itemInSlot.item.Name + " in slot " + i);
+                //print("Saving item: " + itemInSlot.item.Name + " in slot " + i);
                 PlayerPrefs.SetString("Slot" + i, itemInSlot.item.Name);
             }
             else
             {
-                print("Saving empty slot: " + i);   
+                //print("Saving empty slot: " + i);   
                 PlayerPrefs.SetString("Slot" + i, "");
             }
         }

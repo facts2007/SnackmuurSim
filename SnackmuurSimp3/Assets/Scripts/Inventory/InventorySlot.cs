@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 using UnityEngine;
-    using UnityEngine.EventSystems;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
@@ -11,7 +11,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     private void Awake()
     {
         if (image == null)
-            image = GetComponent<RawImage>(); // or GetComponentInChildren<RawImage>()
+            image = GetComponent<RawImage>(); // of GetComponentInChildren<RawImage>()
         Deselect();
     }
     public void Select()
