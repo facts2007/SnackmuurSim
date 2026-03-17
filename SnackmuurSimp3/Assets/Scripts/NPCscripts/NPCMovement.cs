@@ -12,20 +12,20 @@ public class NPC : MonoBehaviour
     private Muur targetMuur;
     private bool hasBought = false;
     private bool isLeaving = false;
+    private int spawnPointIndex = -1;
 
-    public void Initialize(Transform[] wallPositions, Muur[] muren, MoneyManager moneyManager, Transform[] exitPoints)
+    public void Initialize(Transform[] wallPositions, Muur[] muren, MoneyManager moneyManager, Transform[] exitPoints, int spawnIndex)
     {
         this.wallPositions = wallPositions;
         this.muren = muren;
         this.moneyManager = moneyManager;
         this.exitPoints = exitPoints;
-
+        this.spawnPointIndex = spawnIndex;
         agent = GetComponent<NavMeshAgent>();
 
-        var random = Random.value;
-        print("Random value: " + random);
-        if (random > 0.5f)
+        if (Random.value > 0.5f)
         {
+            spawnPointIndex = -1;
             GoToRandomMuur();
         }
         else
@@ -35,7 +35,6 @@ public class NPC : MonoBehaviour
             Leave();
         }
     }
-
     private void Update()
     {
         if (agent == null) return;
@@ -77,7 +76,15 @@ public class NPC : MonoBehaviour
     void Leave()
     {
         isLeaving = true;
-        int random = Random.Range(0, exitPoints.Length);
+
+        System.Collections.Generic.List<int> availableExits = new();
+        for (int i = 0; i < exitPoints.Length; i++)
+        {
+            if (i != spawnPointIndex)
+                availableExits.Add(i);
+        }
+
+        int random = availableExits[Random.Range(0, availableExits.Count)];
         Vector3 exitPos = exitPoints[random].position;
         exitPos += new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
         agent.SetDestination(exitPos);

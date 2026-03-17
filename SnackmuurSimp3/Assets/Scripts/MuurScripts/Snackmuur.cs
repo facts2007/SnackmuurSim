@@ -15,13 +15,13 @@ public class Muur : MonoBehaviour
                 Snackvakje clickedVakje = hit.collider.GetComponent<Snackvakje>();
                 if (clickedVakje != null)
                 {
-                    Item selectedItem = inventoryManager.GetSelectedItem(false);
+                    Item selectedItem = inventoryManager.GetSelectedItem(true);
                     if (selectedItem != null)
                     {
                         bool placed = clickedVakje.PlaceItem(selectedItem);
                         if (placed)
                         {
-                            inventoryManager.GetSelectedItem(true);
+                            inventoryManager.GetSelectedItem(false);
                         }
                     }
                     else

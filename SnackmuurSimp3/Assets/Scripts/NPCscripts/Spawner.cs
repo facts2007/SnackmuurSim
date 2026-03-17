@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour
 
         GameObject newNPC = Instantiate(npcPrefab, spawnPos, Quaternion.identity);
         NPC npcScript = newNPC.GetComponent<NPC>();
-        npcScript.Initialize(wallPositions, muren, moneyManager, exitPoints); // pass all refs
+        npcScript.Initialize(wallPositions, muren, moneyManager, exitPoints, random); // pass all refs
 
         ScheduleNextSpawn();
     }
