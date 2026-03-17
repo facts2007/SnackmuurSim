@@ -21,7 +21,19 @@ public class NPC : MonoBehaviour
         this.exitPoints = exitPoints;
 
         agent = GetComponent<NavMeshAgent>();
-        GoToRandomMuur();
+
+        var random = Random.value;
+        print("Random value: " + random);
+        if (random > 0.5f)
+        {
+            GoToRandomMuur();
+        }
+        else
+        {
+            hasBought = true;
+            isLeaving = true;
+            Leave();
+        }
     }
 
     private void Update()
@@ -53,11 +65,11 @@ public class NPC : MonoBehaviour
         if (item != null)
         {
             moneyManager.GiveMoney(item.Cost);
-            Debug.Log("NPC bought: " + item.Name + " for €" + item.Cost);
+          //  Debug.Log("NPC bought: " + item.Name + " for €" + item.Cost);
         }
         else
         {
-            Debug.Log("No items available!");
+           // Debug.Log("No items available!");
         }
         Leave();
     }
