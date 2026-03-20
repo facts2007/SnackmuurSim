@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour
         inventorySlots[NewValue].Select();
 
         selectedSlot = NewValue;
-        print("Selected Slot: " + selectedSlot);
+      //  print("Selected Slot: " + selectedSlot);
     }
 
     public void AddItem(Item item)

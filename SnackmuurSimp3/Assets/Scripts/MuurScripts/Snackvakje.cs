@@ -20,7 +20,7 @@ public class Snackvakje : MonoBehaviour
 
         currentItem = item;
         SaveItem();
-        Debug.Log("Placed: " + item.Name + " in " + vakjeID);
+       // Debug.Log("Placed: " + item.Name + " in " + vakjeID);
         return true;
     }
 

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,7 @@ public class NPC : MonoBehaviour
     [HideInInspector] public Muur[] muren;
     [HideInInspector] public MoneyManager moneyManager;
     [HideInInspector] public Transform[] exitPoints;
+    public TextMeshProUGUI statusText;
 
     private NavMeshAgent agent;
     private Muur targetMuur;
@@ -41,6 +43,7 @@ public class NPC : MonoBehaviour
 
         if (!hasBought && !isLeaving && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
+            Debug.Log("NPC reached muur, attempting to buy...");
             BuyFromMuur();
         }
 
@@ -64,11 +67,11 @@ public class NPC : MonoBehaviour
         if (item != null)
         {
             moneyManager.GiveMoney(item.Cost);
-          //  Debug.Log("NPC bought: " + item.Name + " for €" + item.Cost);
+            if (statusText != null) statusText.text = "Bought: " + item.Name;
         }
         else
         {
-           // Debug.Log("No items available!");
+            if (statusText != null) statusText.text = "viese tering kut sukkel";
         }
         Leave();
     }
@@ -80,7 +83,7 @@ public class NPC : MonoBehaviour
         System.Collections.Generic.List<int> availableExits = new();
         for (int i = 0; i < exitPoints.Length; i++)
         {
-            if (i != spawnPointIndex)
+            if (i != spawnPointIndex) // -1 never matches so all exits are available
                 availableExits.Add(i);
         }
 

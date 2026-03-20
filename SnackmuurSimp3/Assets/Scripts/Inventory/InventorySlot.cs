@@ -17,12 +17,12 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     public void Select()
     {
         image.color = selectedColor;
-        print("Selected Slot: " + transform.GetSiblingIndex());
+       // print("Selected Slot: " + transform.GetSiblingIndex());
     }
     public void Deselect()
     {
         image.color = notSelectedColor;
-        print("Deselected Slot: " + transform.GetSiblingIndex());
+       // print("Deselected Slot: " + transform.GetSiblingIndex());
     }
     public void OnDrop(PointerEventData eventData)
     {
