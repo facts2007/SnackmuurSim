@@ -71,7 +71,7 @@ public class NPC : MonoBehaviour
         }
         else
         {
-            if (statusText != null) statusText.text = "viese tering kut sukkel";
+            if (statusText != null) statusText.text = "brev er lig niks";
         }
         Leave();
     }
