@@ -67,7 +67,7 @@ public class NPC : MonoBehaviour
         if (item != null)
         {
             moneyManager.GiveMoney(item.Cost);
-            if (statusText != null) statusText.text = "Bought: " + item.Name;
+            if (statusText != null) statusText.text = "Hmm lekker " + item.Name;
         }
         else
         {

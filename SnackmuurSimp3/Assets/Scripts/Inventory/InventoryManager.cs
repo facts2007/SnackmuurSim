@@ -38,7 +38,7 @@ public class InventoryManager : MonoBehaviour
       //  print("Selected Slot: " + selectedSlot);
     }
 
-    public void AddItem(Item item)
+   public void AddItem(Item item)
     {
         bool success = moneyManager.RemoveMoney(item.Cost);
         if (success)
@@ -119,6 +119,6 @@ public class InventoryManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveInventory(); // save when game closes
+        SaveInventory();
     }
 }

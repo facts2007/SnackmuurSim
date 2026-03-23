@@ -18,7 +18,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler,IDragHandler, IEnd
         GetComponentInChildren<TextMeshProUGUI>().text = newItem.Name;
     }
 
-    //drag en drop
+    //drag en drop type shi
     public void OnBeginDrag(PointerEventData eventData) {
         Image.raycastTarget = false;
         parentAfterDrag = transform.parent;
