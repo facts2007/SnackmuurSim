@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,8 +18,7 @@ public class QuestHandler : MonoBehaviour
     public int playerMoney;
 
     [Header("UI")]
-    public Text questText;
-    public Text moneyText;
+    public TextMeshProUGUI questText;
 
     [Header("Extra")]
     public MoneyManager moneyManager;
@@ -70,11 +70,6 @@ public class QuestHandler : MonoBehaviour
         if (questText != null)
         {
             questText.text = questName + "\n" + currentAmount + "/" + targetAmount;
-        }
-
-        if (moneyText != null)
-        {
-            moneyText.text = "€ " + playerMoney;
         }
     }
 }
