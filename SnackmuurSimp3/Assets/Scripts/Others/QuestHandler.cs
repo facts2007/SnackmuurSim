@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SnackQuestSystem : MonoBehaviour
+public class QuestHandler : MonoBehaviour
 {
     [Header("Quest")]
     public string questName;
@@ -29,20 +29,11 @@ public class SnackQuestSystem : MonoBehaviour
         UpdateUI();
     }
 
-    void Update()
-    {
-        // TEST: druk op spatie om snack te verkopen
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SellSnack(1);
-        }
-    }
-
     // 🍟 Snack verkopen
     public void SellSnack(int amount)
     {
         currentAmount += amount;
-
+        print("Verkocht: " + amount + " snacks. Totaal verkocht: " + currentAmount);
         if (currentAmount >= targetAmount)
         {
             CompleteQuest();

@@ -34,7 +34,6 @@ public class DirtSpawner : MonoBehaviour
             GameObject dirt = Instantiate(dirtPrefab, randomPos, Quaternion.identity);
             currentDirtCount++;
 
-            // listen for when dirt gets cleaned
             dirt.GetComponent<Dirt>().OnCleaned += () => currentDirtCount--;
         }
 

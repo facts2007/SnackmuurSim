@@ -13,6 +13,7 @@ public class Spawner : MonoBehaviour
     public Transform[] wallPositions;
     public Muur[] muren;
     public MoneyManager moneyManager;
+    public QuestHandler questhandler;
     public Transform[] exitPoints;
 
     private void Start()
@@ -36,7 +37,7 @@ public class Spawner : MonoBehaviour
         GameObject newNPC = Instantiate(npcPrefabs[randomNPC], spawnPos, Quaternion.identity);
 
         NPC npcScript = newNPC.GetComponent<NPC>();
-        npcScript.Initialize(wallPositions, muren, moneyManager, exitPoints, randomSpawn);
+        npcScript.Initialize(wallPositions, muren, moneyManager, exitPoints, randomSpawn, questhandler);
 
         ScheduleNextSpawn();
     }

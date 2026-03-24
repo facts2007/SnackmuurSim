@@ -8,6 +8,8 @@ public class NPC : MonoBehaviour
     [HideInInspector] public Muur[] muren;
     [HideInInspector] public MoneyManager moneyManager;
     [HideInInspector] public Transform[] exitPoints;
+    [HideInInspector] public QuestHandler questhandler;
+
     public TextMeshProUGUI statusText;
 
     private NavMeshAgent agent;
@@ -16,11 +18,12 @@ public class NPC : MonoBehaviour
     private bool isLeaving = false;
     private int spawnPointIndex = -1;
 
-    public void Initialize(Transform[] wallPositions, Muur[] muren, MoneyManager moneyManager, Transform[] exitPoints, int spawnIndex)
+    public void Initialize(Transform[] wallPositions, Muur[] muren, MoneyManager moneyManager, Transform[] exitPoints, int spawnIndex, QuestHandler questhandler)
     {
         this.wallPositions = wallPositions;
         this.muren = muren;
         this.moneyManager = moneyManager;
+        this.questhandler = questhandler;
         this.exitPoints = exitPoints;
         this.spawnPointIndex = spawnIndex;
         agent = GetComponent<NavMeshAgent>();
@@ -82,6 +85,7 @@ public class NPC : MonoBehaviour
         if (item != null)
         {
             moneyManager.GiveMoney(item.Cost);
+            questhandler.SellSnack(1); // error here
             if (statusText != null) statusText.text = "Hmm lekker " + item.Name;
         }
         else

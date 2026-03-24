@@ -36,7 +36,7 @@ public class BroomPickup : MonoBehaviour
 
     void ToggleBroom()
     {
-        if (!isHeld)
+        if (!isHeld) //! is niet isheld (dus false)
         {
             transform.SetParent(holdPoint);
             transform.localPosition = Vector3.zero;
