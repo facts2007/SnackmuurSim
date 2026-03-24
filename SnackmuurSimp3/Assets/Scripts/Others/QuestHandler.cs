@@ -46,8 +46,7 @@ public class QuestHandler : MonoBehaviour
     {
         Debug.Log("Quest voltooid!");
 
-       
-         moneyManager.GiveMoney(rewardMoney);
+        moneyManager.GiveMoney(rewardMoney);
 
         GenerateNewQuest();
     }
@@ -56,7 +55,7 @@ public class QuestHandler : MonoBehaviour
     {
         currentAmount = 0;
 
-        targetAmount = Random.Range(minTarget, maxTarget + 1);
+        targetAmount = Random.Range(minTarget, maxTarget);
 
         rewardMoney = targetAmount * 2;
 
