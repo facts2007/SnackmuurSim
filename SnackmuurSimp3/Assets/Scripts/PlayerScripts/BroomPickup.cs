@@ -38,7 +38,6 @@ public class BroomPickup : MonoBehaviour
     {
         if (!isHeld)
         {
-            // Pick up
             transform.SetParent(holdPoint);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
@@ -46,7 +45,6 @@ public class BroomPickup : MonoBehaviour
         }
         else
         {
-            // Put back
             transform.SetParent(null);
             transform.position = originalPosition;
             transform.rotation = originalRotation;
@@ -65,7 +63,6 @@ public class BroomPickup : MonoBehaviour
         }
         else
         {
-            // Reset rotation smoothly when not sweeping
             swayTimer = 0f;
             transform.localRotation = Quaternion.Lerp(
                 transform.localRotation,

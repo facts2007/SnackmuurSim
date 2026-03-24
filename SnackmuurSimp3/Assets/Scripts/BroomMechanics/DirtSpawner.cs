@@ -3,18 +3,27 @@ using UnityEngine;
 public class DirtSpawner : MonoBehaviour
 {
     public GameObject dirtPrefab;
-    public int amountToSpawn = 10;
-
     public Vector3 areaSize = new Vector3(5, 1, 5);
+    public float minSpawnTime = 5f;
+    public float maxSpawnTime = 15f;
+    public int maxDirt = 3;
 
-    void Start()
+    private int currentDirtCount = 0;
+
+    private void Start()
     {
-        SpawnDirt();
+        ScheduleNextSpawn();
+    }
+
+    void ScheduleNextSpawn()
+    {
+        float randomTime = Random.Range(minSpawnTime, maxSpawnTime);
+        Invoke(nameof(SpawnDirt), randomTime);
     }
 
     void SpawnDirt()
     {
-        for (int i = 0; i < amountToSpawn; i++)
+        if (currentDirtCount < maxDirt)
         {
             Vector3 randomPos = transform.position + new Vector3(
                 Random.Range(-areaSize.x / 2, areaSize.x / 2),
@@ -22,7 +31,13 @@ public class DirtSpawner : MonoBehaviour
                 Random.Range(-areaSize.z / 2, areaSize.z / 2)
             );
 
-            Instantiate(dirtPrefab, randomPos, Quaternion.identity);
+            GameObject dirt = Instantiate(dirtPrefab, randomPos, Quaternion.identity);
+            currentDirtCount++;
+
+            // listen for when dirt gets cleaned
+            dirt.GetComponent<Dirt>().OnCleaned += () => currentDirtCount--;
         }
+
+        ScheduleNextSpawn();
     }
 }

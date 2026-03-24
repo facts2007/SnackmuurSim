@@ -47,4 +47,14 @@ public class Muur : MonoBehaviour
         int random = Random.Range(0, available.Count);
         return available[random].BuyItem();
     }
+
+    public bool HasAvailableItems()
+    {
+        foreach (Snackvakje vakje in vakjes)
+        {
+            if (vakje == null) continue;
+            if (vakje.currentItem != null) return true;
+        }
+        return false;
+    }
 }

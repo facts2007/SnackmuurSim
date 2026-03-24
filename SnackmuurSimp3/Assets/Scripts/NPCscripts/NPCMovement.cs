@@ -55,7 +55,22 @@ public class NPC : MonoBehaviour
 
     void GoToRandomMuur()
     {
-        int random = Random.Range(0, muren.Length);
+        System.Collections.Generic.List<int> availableMuren = new();
+        for (int i = 0; i < muren.Length; i++)
+        {
+            if (muren[i] != null && muren[i].HasAvailableItems())
+                availableMuren.Add(i);
+        }
+
+        if (availableMuren.Count == 0)
+        {
+            hasBought = true;
+            isLeaving = true;
+            Leave();
+            return;
+        }
+
+        int random = availableMuren[Random.Range(0, availableMuren.Count)];
         targetMuur = muren[random];
         agent.SetDestination(wallPositions[random].position);
     }
