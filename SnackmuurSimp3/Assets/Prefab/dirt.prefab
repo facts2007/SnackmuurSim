@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 53956305488310723}
   - component: {fileID: 1774540952585064633}
   - component: {fileID: 1023615802417447028}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,4 +125,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646c905d0eca47648a01511be9b6245f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dirt
-  cleanSpeed: 2
+  cleanSpeed: 1

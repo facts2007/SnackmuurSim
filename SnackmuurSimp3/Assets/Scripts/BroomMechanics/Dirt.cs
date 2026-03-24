@@ -16,17 +16,12 @@ public class Dirt : MonoBehaviour
 
     public void Clean()
     {
+        
         transparency -= Time.deltaTime * cleanSpeed;
         if (transparency <= 0)
         {
             OnCleaned?.Invoke();
             Destroy(gameObject);
-        }
-        else
-        {
-            Color c = rend.material.color;
-            c.a = transparency;
-            rend.material.color = c;
         }
     }
 }
