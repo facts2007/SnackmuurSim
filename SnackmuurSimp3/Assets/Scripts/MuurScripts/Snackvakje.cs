@@ -4,6 +4,9 @@ public class Snackvakje : MonoBehaviour
 {
     public string vakjeID;
     public Item currentItem;
+    public Transform displayPoint; // empty GameObject inside vakje where item spawns
+
+    private GameObject currentDisplayObject;
 
     private void Start()
     {
@@ -20,43 +23,63 @@ public class Snackvakje : MonoBehaviour
 
         currentItem = item;
         SaveItem();
-       // Debug.Log("Placed: " + item.Name + " in " + vakjeID);
+        SpawnDisplayObject();
         return true;
     }
 
     public Item BuyItem()
     {
-        Debug.Log("BuyItem called on: " + vakjeID + " current item: " + (currentItem != null ? currentItem.Name : "null"));
         if (currentItem == null) return null;
 
         Item boughtItem = currentItem;
         currentItem = null;
-
-        InventoryItem visual = GetComponentInChildren<InventoryItem>();
-        if (visual != null)
-        {
-            Destroy(visual.gameObject);
-        }
-
+        DestroyDisplayObject();
         PlayerPrefs.SetString(vakjeID, "");
         PlayerPrefs.Save();
-
-        Debug.Log("Bought: " + boughtItem.Name + " vakje is now empty.");
         return boughtItem;
     }
 
-    private void SaveItem()
+    void SpawnDisplayObject()
+    {
+        DestroyDisplayObject();
+        if (currentItem == null) return;
+
+        GameObject prefab = Resources.Load<GameObject>(currentItem.Name);
+        if (prefab != null)
+        {
+            Transform spawnAt = displayPoint != null ? displayPoint : transform;
+            currentDisplayObject = Instantiate(prefab, spawnAt.position, spawnAt.rotation);
+            currentDisplayObject.transform.SetParent(spawnAt);
+        }
+        else
+        {
+            Debug.LogWarning("No prefab found in Resources for: " + currentItem.Name);
+        }
+    }
+
+    void DestroyDisplayObject()
+    {
+        if (currentDisplayObject != null)
+        {
+            Destroy(currentDisplayObject);
+            currentDisplayObject = null;
+        }
+    }
+
+    void SaveItem()
     {
         PlayerPrefs.SetString(vakjeID, currentItem != null ? currentItem.Name : "");
         PlayerPrefs.Save();
     }
 
-    private void LoadItem()
+    void LoadItem()
     {
         string savedName = PlayerPrefs.GetString(vakjeID, "");
         if (savedName != "")
         {
             currentItem = Resources.Load<Item>(savedName);
+            if (currentItem != null)
+                SpawnDisplayObject();
         }
     }
 }

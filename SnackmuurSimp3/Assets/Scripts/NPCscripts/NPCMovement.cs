@@ -84,8 +84,8 @@ public class NPC : MonoBehaviour
         Item item = targetMuur.GetRandomAvailableItem();
         if (item != null)
         {
-            moneyManager.GiveMoney(item.Cost);
-            questhandler.SellSnack(1); // error here
+            moneyManager.GiveMoney(item.Cost * 1.2f);
+            questhandler.SellSnack(1);
             if (statusText != null) statusText.text = "Hmm lekker " + item.Name;
         }
         else
@@ -102,7 +102,7 @@ public class NPC : MonoBehaviour
         System.Collections.Generic.List<int> availableExits = new();
         for (int i = 0; i < exitPoints.Length; i++)
         {
-            if (i != spawnPointIndex) // -1 never matches so all exits are available
+            if (i != spawnPointIndex)
                 availableExits.Add(i);
         }
 

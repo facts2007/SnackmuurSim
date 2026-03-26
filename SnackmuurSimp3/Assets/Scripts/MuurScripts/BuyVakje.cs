@@ -56,7 +56,7 @@ public class VakjeShop : MonoBehaviour
     void UpdatePriceText()
     {
         if (priceText != null)
-            priceText.text = "Buy Vakje: €" + GetCurrentCost().ToString("F2");
+            priceText.text = "€" + GetCurrentCost().ToString("F2");
     }
 
     void RefreshVakjes()

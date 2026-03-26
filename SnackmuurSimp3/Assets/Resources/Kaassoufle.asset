@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683060c15e0b12841b40dc291e9c2d71, type: 3}
+  m_Name: Kaassoufle
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  Name: Kaassoufle
+  tile: {fileID: 0}
+  image: {fileID: 2800000, guid: 9b6cc1c82d5bb074090e0629cd769b33, type: 3}
+  Cost: 3.5
+  stackable: 0
