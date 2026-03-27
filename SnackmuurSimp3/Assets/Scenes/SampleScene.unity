@@ -10803,6 +10803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
   npcPrefabs:
   - {fileID: 4233792029180883953, guid: ab833c76697a0c245a4493fac6012711, type: 3}
+  - {fileID: 9164432400363348072, guid: 7ff7a1a93a40d314c939d6b65abd43cd, type: 3}
   spawnPoints:
   - {fileID: 2055215304}
   - {fileID: 419902664}

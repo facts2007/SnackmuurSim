@@ -13,9 +13,12 @@ public class NPC : MonoBehaviour
     public TextMeshProUGUI statusText;
 
     private NavMeshAgent agent;
+    private Animator animator;
+
     private Muur targetMuur;
     private bool hasBought = false;
     private bool isLeaving = false;
+
     private int spawnPointIndex = -1;
 
     public void Initialize(Transform[] wallPositions, Muur[] muren, MoneyManager moneyManager, Transform[] exitPoints, int spawnIndex, QuestHandler questhandler)
@@ -26,7 +29,9 @@ public class NPC : MonoBehaviour
         this.questhandler = questhandler;
         this.exitPoints = exitPoints;
         this.spawnPointIndex = spawnIndex;
+
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
 
         if (Random.value > 0.5f)
         {
@@ -40,16 +45,18 @@ public class NPC : MonoBehaviour
             Leave();
         }
     }
+
     private void Update()
     {
         if (agent == null) return;
 
+        // aangekomen bij muur
         if (!hasBought && !isLeaving && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            Debug.Log("NPC reached muur, attempting to buy...");
             BuyFromMuur();
         }
 
+        // aangekomen bij exit
         if (isLeaving && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
             Destroy(gameObject);
@@ -59,6 +66,7 @@ public class NPC : MonoBehaviour
     void GoToRandomMuur()
     {
         System.Collections.Generic.List<int> availableMuren = new();
+
         for (int i = 0; i < muren.Length; i++)
         {
             if (muren[i] != null && muren[i].HasAvailableItems())
@@ -75,23 +83,44 @@ public class NPC : MonoBehaviour
 
         int random = availableMuren[Random.Range(0, availableMuren.Count)];
         targetMuur = muren[random];
+
         agent.SetDestination(wallPositions[random].position);
     }
 
     void BuyFromMuur()
     {
         hasBought = true;
+
+        agent.isStopped = true;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Grab");
+        }
+
+        Invoke(nameof(FinishBuying), 2f);
+    }
+
+    void FinishBuying()
+    {
         Item item = targetMuur.GetRandomAvailableItem();
+
         if (item != null)
         {
             moneyManager.GiveMoney(item.Cost * 1.2f);
             questhandler.SellSnack(1);
-            if (statusText != null) statusText.text = "Hmm lekker " + item.Name;
+
+            if (statusText != null)
+                statusText.text = "Hmm lekker " + item.Name;
         }
         else
         {
-            if (statusText != null) statusText.text = "brev er lig niks";
+            if (statusText != null)
+                statusText.text = "brev er lig niks";
         }
+
+        agent.isStopped = false;
+
         Leave();
     }
 
@@ -100,6 +129,7 @@ public class NPC : MonoBehaviour
         isLeaving = true;
 
         System.Collections.Generic.List<int> availableExits = new();
+
         for (int i = 0; i < exitPoints.Length; i++)
         {
             if (i != spawnPointIndex)
@@ -107,8 +137,10 @@ public class NPC : MonoBehaviour
         }
 
         int random = availableExits[Random.Range(0, availableExits.Count)];
+
         Vector3 exitPos = exitPoints[random].position;
         exitPos += new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+
         agent.SetDestination(exitPos);
     }
 }
