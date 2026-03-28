@@ -28,7 +28,6 @@ public class BroomPickup : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                print(hit.collider.gameObject.name);
                 if (hit.collider.gameObject == gameObject)
                 {
                     float distance = Vector3.Distance(Camera.main.transform.position, transform.position);
