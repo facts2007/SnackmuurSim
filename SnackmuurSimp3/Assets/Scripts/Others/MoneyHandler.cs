@@ -4,7 +4,7 @@ using TMPro;
 public class MoneyManager : MonoBehaviour
 {
     public TextMeshProUGUI moneyText;
-    public float currentMoney = 0f;
+    public float currentMoney = 5f;
 
     private void Start()
     {
