@@ -4,7 +4,7 @@ public class Snackvakje : MonoBehaviour
 {
     public string vakjeID;
     public Item currentItem;
-    public Transform displayPoint; // empty GameObject inside vakje where item spawns
+    public Transform displayPoint;
 
     private GameObject currentDisplayObject;
 

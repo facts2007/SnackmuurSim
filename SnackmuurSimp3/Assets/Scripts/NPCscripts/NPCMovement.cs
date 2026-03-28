@@ -33,6 +33,9 @@ public class NPC : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
+        if (statusText != null)
+            statusText.text = "";
+
         if (Random.value > 0.5f)
         {
             spawnPointIndex = -1;

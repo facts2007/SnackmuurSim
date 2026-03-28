@@ -23,9 +23,25 @@ public class BroomPickup : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetMouseButtonDown(0))
         {
-            ToggleBroom();
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                print(hit.collider.gameObject.name);
+                if (hit.collider.gameObject == gameObject)
+                {
+                    float distance = Vector3.Distance(Camera.main.transform.position, transform.position);
+                    if (distance <= 30)
+                    {
+                        ToggleBroom();
+                    }
+                    else
+                    {
+                        Debug.Log("Too far away!");
+                    }
+                }
+            }
         }
 
         if (isHeld)
@@ -36,7 +52,7 @@ public class BroomPickup : MonoBehaviour
 
     void ToggleBroom()
     {
-        if (!isHeld) //! is niet isheld (dus false)
+        if (!isHeld)
         {
             transform.SetParent(holdPoint);
             transform.localPosition = Vector3.zero;
@@ -50,6 +66,8 @@ public class BroomPickup : MonoBehaviour
             transform.rotation = originalRotation;
             isHeld = false;
         }
+
+        transform.localScale = Vector3.one * 100;
     }
 
     void HandleSway()
