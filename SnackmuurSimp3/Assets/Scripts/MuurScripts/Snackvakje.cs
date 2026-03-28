@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Snackvakje : MonoBehaviour
@@ -5,6 +6,7 @@ public class Snackvakje : MonoBehaviour
     public string vakjeID;
     public Item currentItem;
     public Transform displayPoint;
+    public TextMeshProUGUI itemNameText;
 
     private GameObject currentDisplayObject;
 
@@ -24,6 +26,7 @@ public class Snackvakje : MonoBehaviour
         currentItem = item;
         SaveItem();
         SpawnDisplayObject();
+        UpdateNameText();
         return true;
     }
 
@@ -34,6 +37,7 @@ public class Snackvakje : MonoBehaviour
         Item boughtItem = currentItem;
         currentItem = null;
         DestroyDisplayObject();
+        UpdateNameText();
         PlayerPrefs.SetString(vakjeID, "");
         PlayerPrefs.Save();
         return boughtItem;
@@ -53,7 +57,7 @@ public class Snackvakje : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No prefab found in Resources for: " + currentItem.Name);
+            Debug.LogWarning("No prefab found in Resources/Prefabs/ for: " + currentItem.Name);
         }
     }
 
@@ -64,6 +68,12 @@ public class Snackvakje : MonoBehaviour
             Destroy(currentDisplayObject);
             currentDisplayObject = null;
         }
+    }
+
+    void UpdateNameText()
+    {
+        if (itemNameText == null) return;
+        itemNameText.text = currentItem != null ? currentItem.Name : "";
     }
 
     void SaveItem()
@@ -77,9 +87,12 @@ public class Snackvakje : MonoBehaviour
         string savedName = PlayerPrefs.GetString(vakjeID, "");
         if (savedName != "")
         {
-            currentItem = Resources.Load<Item>(savedName);
+            currentItem = Resources.Load<Item>("Items/" + savedName);
             if (currentItem != null)
+            {
                 SpawnDisplayObject();
+                UpdateNameText();
+            }
         }
     }
 }
