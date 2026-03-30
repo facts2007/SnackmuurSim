@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 683060c15e0b12841b40dc291e9c2d71, type: 3}
   m_Name: Bamischijf
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  Name: Kroket
+  Name: Bamischijf
   tile: {fileID: 0}
   image: {fileID: 2800000, guid: 14e77edeceaf1b244b4e732894a8e79e, type: 3}
   Cost: 900

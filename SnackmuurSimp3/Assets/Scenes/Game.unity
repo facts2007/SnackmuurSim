@@ -12601,8 +12601,8 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 2055215304}
   - {fileID: 419902664}
-  minSpawnTime: 3
-  maxSpawnTime: 8
+  minSpawnTime: 1
+  maxSpawnTime: 3
   spawnOffset: 1
   wallPositions:
   - {fileID: 1304968885}
